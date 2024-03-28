@@ -1,0 +1,18 @@
+#Buduje obraz na podstawie obrazu z docker huba
+FROM python:3
+
+#Tworzy ścieżkę roboczą w kontenerze dockera
+WORKDIR /usr/src/app
+
+#Kopuje kod do kontenera dockera
+COPY . .
+
+#Instalacja zależności w kontenerze dockera
+RUN pip install -q fastapi
+RUN pip install -q uvicorn
+
+#Wystawia port komunikacji z kontenerem
+EXPOSE 8000
+
+#uruchamia aplikację wewnątrz kontenera
+CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

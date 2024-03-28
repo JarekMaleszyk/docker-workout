@@ -1,0 +1,20 @@
+#Buduje obraz na podstawie obrazu z docker huba
+FROM node:14
+
+#Tworzy ścieżkę roboczą w kontenerze dockera
+WORKDIR /usr/src/app
+
+#Kopuje pliki konfiguracji
+COPY package*.json app.js ./
+
+#Instalacja zależności w kontenerze dockera
+RUN npm install
+
+#Kopuje kod do kontenera dockera
+COPY . .
+
+#Wystawia port komunikacji z kontenerem
+EXPOSE 8080
+
+#uruchamia aplikację wewnątrz kontenera
+CMD ["node", "app.js"]
